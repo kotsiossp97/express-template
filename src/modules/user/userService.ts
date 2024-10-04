@@ -1,8 +1,9 @@
+import { StatusCodes } from "http-status-codes";
+
 import { ResponseStatus, ServiceResponse } from "@common/models/serviceResponse";
 import { User } from "@modules/user/userModel";
 import { userRepository } from "@modules/user/userRepository";
 import { logger } from "@src/server";
-import { StatusCodes } from "http-status-codes";
 
 export const userService = {
   findAll: async (): Promise<ServiceResponse<User[] | null>> => {

@@ -1,26 +1,29 @@
+import cors from "cors";
+import express, { Express } from "express";
+import helmet from "helmet";
+import { pino } from "pino";
+
 import { openAPIRouter } from "@api-docs/openAPIRouter";
 import errorHandler from "@common/middleware/errorHandler";
 import rateLimiter from "@common/middleware/rateLimiter";
 import requestLogger from "@common/middleware/requestLogger";
+import { getCorsOrigin } from "@common/utils/envConfig";
 import { userRouter } from "@modules/user/userRouter";
-import cors from "cors";
-import dotenv from "dotenv";
-import express, { Express } from "express";
-import helmet from "helmet";
-import path from "path";
-import { pino } from "pino";
-
-dotenv.config({
-  path: path.resolve(__dirname, "../.env"),
-});
 
 const logger = pino({ name: "server start" });
 const app: Express = express();
+const corsOrigin = getCorsOrigin();
 
 // Middlewares
-app.use(express.json());
-app.use(cors());
-app.use(helmet());
+app.use(express.json({ limit: "20mb" }));
+app.use(cors({ origin: corsOrigin.split(";") }));
+
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
 app.use(rateLimiter);
 
 // Request logging

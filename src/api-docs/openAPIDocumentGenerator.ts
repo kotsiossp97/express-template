@@ -1,4 +1,5 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
+
 import { userRegistry } from "@modules/user/userRouter";
 
 export function generateOpenAPIDocument() {

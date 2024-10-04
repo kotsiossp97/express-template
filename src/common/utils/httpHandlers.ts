@@ -1,10 +1,11 @@
-import { ResponseStatus, ServiceResponse } from "@common/models/serviceResponse";
-import { getEnvVar } from "@common/utils/envConfig";
-import { logger } from "@src/server";
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import { ZodError, ZodSchema } from "zod";
+
+import { ResponseStatus, ServiceResponse } from "@common/models/serviceResponse";
+import { getEnvVar } from "@common/utils/envConfig";
+import { logger } from "@src/server";
 
 export const handleServiceResponse = (serviceResponse: ServiceResponse<any>, response: Response) => {
   return response.status(serviceResponse.statusCode).send(serviceResponse);

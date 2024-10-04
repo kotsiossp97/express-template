@@ -1,9 +1,10 @@
-import { getNodeEnv } from "@common/utils/envConfig";
 import { randomUUID } from "crypto";
 import { Request, RequestHandler, Response } from "express";
 import { IncomingMessage, ServerResponse } from "http";
 import { LevelWithSilent } from "pino";
 import { CustomAttributeKeys, Options, pinoHttp } from "pino-http";
+
+import { getNodeEnv } from "@common/utils/envConfig";
 
 type PinoCustomProps = {
   request: Request;
